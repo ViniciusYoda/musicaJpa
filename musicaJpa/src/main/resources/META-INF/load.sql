@@ -1,0 +1,6 @@
+INSERT INTO [dbo].[Artist] ([artist_name],[artist_type]) VALUES (0, 'Ariana Grande', 'Pop')
+INSERT INTO [dbo].[Artist] ([artist_name],[artist_type]) VALUES (0, 'Selena Marie Gomez', 'Pop')
+INSERT INTO [dbo].[Genre] ([genre_name]) VALUES (0, 'Pop')
+INSERT INTO [dbo].[Genre] ([genre_name]) VALUES (0, 'Rock')
+INSERT INTO [dbo].[RecordLabel] ([record_label_name],[website]) VALUES (0, 'Ithaca Holdings', 'www.ithacaholding.com')
+INSERT INTO [dbo].[RecordLabel] ([record_label_name],[website]) VALUES (0, 'Hybe', 'https://hybecorp.com/eng/main')
