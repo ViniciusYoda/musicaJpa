@@ -12,7 +12,7 @@ public class ArtistRepository {
     }
 
     public Iterable<Artist> findAll() {
-        var jpql = "SELECT c FROM Aritst c";
+        var jpql = "SELECT c FROM Artist c";
         var query = entityManager.createQuery(jpql, Artist.class);
         var Artist = query.getResultList();
         return Artist;
@@ -22,11 +22,6 @@ public class ArtistRepository {
         return entityManager.find(Artist.class, id);
     }
 
-    public Artist findByIdNamedQuery(Long id){
-        var query = entityManager.createNamedQuery("Artist.findById", Artist.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
-    }
 
     public void InserirArtist(Artist artist){
         try {
@@ -39,16 +34,7 @@ public class ArtistRepository {
         }
     }
 
-    public void InserirType(Artist artist){
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(artist);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            throw e;
-        }
-    }
+
 
 
     public void AtualizarArtist(Artist artist){
@@ -62,16 +48,7 @@ public class ArtistRepository {
         }
     }
 
-    public void AtualizarType(Artist artist){
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.merge(artist);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            throw e;
-        }
-    }
+
 
     public void InserirOuAtualizarArtist(Artist artist) {
         try {
@@ -90,58 +67,21 @@ public class ArtistRepository {
         }
     }
 
-    public void InserirOuAtualizarType(Artist artist) {
+
+
+    public void RemoverArtist(long id){
         try {
             entityManager.getTransaction().begin();
-
-            var type_existente = findById(artist.getArtist_ID());
-            if (type_existente != null)
-                entityManager.merge(artist);
-            else
-                entityManager.persist(artist);
-
-            entityManager.getTransaction().commit();
-        } catch (Exception e){
-            entityManager.getTransaction().rollback();
-            throw e;
-        }
-    }
-
-    public void RemoverArtist(Artist artist){
-        try {
-            entityManager.getTransaction().begin();
+            var artist = entityManager.find(Artist.class, id);
             entityManager.remove(artist);
-            entityManager.merge(artist);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
     }
 
-    public void RemoverType(Artist artist){
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.remove(artist);
-            entityManager.merge(artist);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-        }
-    }
 
-    public void RemoverArtistById(Long id){
-        try {
-            entityManager.getTransaction().begin();
-            var artist = findById(id);
-            entityManager.remove(artist);
-            entityManager.merge(artist);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            throw e;
-        }
-    }
-
+    
 
 
 

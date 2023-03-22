@@ -1,6 +1,7 @@
 package org.example.repositories;
 
 import jakarta.persistence.EntityManager;
+import org.example.models.Artist;
 import org.example.models.Genre;
 
 public class GenreRepository {
@@ -67,11 +68,11 @@ public class GenreRepository {
         }
     }
 
-    public void RemoverGenre(Genre genre){
+    public void RemoverGenre(long id){
         try {
             entityManager.getTransaction().begin();
+            var genre = entityManager.find(Genre.class, id);
             entityManager.remove(genre);
-            entityManager.merge(genre);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();

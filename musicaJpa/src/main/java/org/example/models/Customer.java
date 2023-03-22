@@ -2,7 +2,11 @@ package org.example.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import java.util.List;
+
 @Entity
 @Table(name = "customer")
 public class Customer {
@@ -15,6 +19,9 @@ public class Customer {
     private String card_information;
     private double ip_address;
     private String device;
+
+//    @OneToMany(mappedBy = "Customer")
+//    private List<Purchase> purchases;
 
     public Customer(String email, String name, String password, int age, String card_information, double ip_address, String device) {
         this.email = email;

@@ -16,6 +16,9 @@ public class RecordLabel {
     private String record_label_name;
     private String website;
 
+    public RecordLabel() {
+    }
+
     public RecordLabel(Long record_label_ID, String record_label_name, String website) {
         this.record_label_ID = record_label_ID;
         this.record_label_name = record_label_name;

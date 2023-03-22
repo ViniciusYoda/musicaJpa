@@ -1,6 +1,7 @@
 package org.example.repositories;
 
 import jakarta.persistence.EntityManager;
+import org.example.models.Artist;
 import org.example.models.RecordLabel;
 
 public class RecordLabelRepository {
@@ -12,7 +13,7 @@ public class RecordLabelRepository {
     }
 
     public Iterable<RecordLabel> findAll() {
-        var jpql = "SELECT c FROM RecordaLabel c";
+        var jpql = "SELECT c FROM RecordLabel c";
         var query = entityManager.createQuery(jpql, RecordLabel.class);
         var RecordLabel = query.getResultList();
         return RecordLabel;
@@ -67,16 +68,15 @@ public class RecordLabelRepository {
         }
     }
 
-    public void RemoverRecordLabel(RecordLabel recordLabel){
+    public void RemoverRecordLabel(long id){
         try {
             entityManager.getTransaction().begin();
+            var recordLabel = entityManager.find(RecordLabel.class, id);
             entityManager.remove(recordLabel);
-            entityManager.merge(recordLabel);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
     }
 
-   
 }
